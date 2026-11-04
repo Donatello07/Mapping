@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Webcontent Mapping - SQL Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Webcontent Mapping &ndash; SQL Generator</h1>
+    <p>Generates SQL for <code>public.webcontentmappingtoliferay</code>.</p>
+  </header>
+
+  <main>
+    <nav class="tabs" aria-label="SQL type">
+      <button type="button" data-tab="insert" class="active">Insert</button>
+      <button type="button" data-tab="update">Update by id</button>
+      <button type="button" data-tab="delete">Delete by id</button>
+    </nav>
+
+    <!-- INSERT -->
+    <div id="tab-insert" class="tab-panel">
+      <section class="card">
+        <h2>Defaults for new rows</h2>
+        <div class="defaults">
+          <label>structureid <input id="defStructure" inputmode="numeric" value="1435696"></label>
+          <label>sitetitle <input id="defSiteTitle" value="Demo Migration"></label>
+          <label>siteid <input id="defSite" inputmode="numeric" value="143718"></label>
+        </div>
+      </section>
+      <section class="card">
+        <div class="toolbar">
+          <button id="addInsert" class="primary" type="button">+ Add row</button>
+          <button id="clearInsert" type="button">Clear all</button>
+        </div>
+        <div class="table-wrap"><table><thead id="insertHead"></thead><tbody id="insertBody"></tbody></table></div>
+        <p class="hint">Dates: type <code>CURRENT_TIMESTAMP</code> (no quotes in SQL) or a value like <code>2026-11-03 08:35:33</code> (quoted). Rows with an empty structureid are skipped. All rows go into one INSERT.</p>
+      </section>
+    </div>
+
+    <!-- UPDATE -->
+    <div id="tab-update" class="tab-panel" hidden>
+      <section class="card">
+        <div class="toolbar">
+          <button id="addUpdate" class="primary" type="button">+ Add row</button>
+          <button id="clearUpdate" type="button">Clear all</button>
+        </div>
+        <div class="table-wrap"><table><thead id="updateHead"></thead><tbody id="updateBody"></tbody></table></div>
+        <p class="hint">One UPDATE per row, <code>WHERE id = &hellip;</code>. Only filled fields are changed; leave a field empty (or ismandatory on &ldquo;(no change)&rdquo;) to keep its current value. <code>modifieddate</code> defaults to <code>CURRENT_TIMESTAMP</code>. Rows with an empty id are skipped.</p>
+      </section>
+    </div>
+
+    <!-- DELETE -->
+    <div id="tab-delete" class="tab-panel" hidden>
+      <section class="card">
+        <h2>Ids to delete</h2>
+        <textarea id="deleteIds" rows="6" spellcheck="false" placeholder="101, 102, 103&#10;or one id per line"></textarea>
+        <p class="hint">Separate ids with commas, spaces or new lines. One id gives <code>WHERE id = &hellip;</code>, several ids give <code>WHERE id IN (&hellip;)</code>.</p>
+      </section>
+    </div>
+
+    <section class="card">
+      <div class="toolbar">
+        <h2 id="outputTitle">Generated script</h2>
+        <span id="status" class="status"></span>
+        <span class="spacer"></span>
+        <button id="copyAll" class="primary" type="button">Copy all</button>
+        <button id="downloadSql" type="button">Download .sql</button>
+      </div>
+      <textarea id="output" readonly spellcheck="false" rows="10"></textarea>
+    </section>
+
+    <datalist id="fieldTypes">
+      <option value="Text"><option value="RichText"><option value="Numeric"><option value="Date">
+      <option value="Checkbox"><option value="Image"><option value="Select">
+    </datalist>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

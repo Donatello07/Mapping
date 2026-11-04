@@ -1,0 +1,59 @@
+:root {
+  --bg: #f4f6f8; --card: #ffffff; --text: #1f2933; --muted: #6b7785; --border: #d5dbe1;
+  --accent: #1f4e78; --accent-text: #ffffff; --danger: #c0392b; --code-bg: #eef1f4;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181d; --card: #1d232a; --text: #e6eaee; --muted: #95a1ae; --border: #333c46;
+    --accent: #5b9bd5; --accent-text: #0e1114; --danger: #ff6b5b; --code-bg: #2a323b;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 14px/1.5 Arial, Helvetica, sans-serif; background: var(--bg); color: var(--text); }
+header { padding: 20px 24px 4px; }
+h1 { margin: 0 0 4px; font-size: 22px; }
+h2 { margin: 0 0 10px; font-size: 15px; }
+header p { margin: 0; color: var(--muted); }
+main { padding: 16px 24px 32px; display: grid; gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-family: Consolas, monospace; }
+
+.defaults { display: flex; flex-wrap: wrap; gap: 12px; }
+.defaults label { display: grid; gap: 4px; color: var(--muted); font-size: 12px; }
+input, select, textarea {
+  font: inherit; color: var(--text); background: var(--card);
+  border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+}
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+input.invalid { border-color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, var(--card)); }
+
+.toolbar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.toolbar h2 { margin: 0; }
+.spacer { flex: 1; }
+button {
+  font: inherit; cursor: pointer; color: var(--text); background: var(--card);
+  border: 1px solid var(--border); border-radius: 6px; padding: 7px 14px;
+}
+button:hover { border-color: var(--accent); }
+button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+button.del { padding: 4px 9px; color: var(--danger); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 6px; }
+table { border-collapse: collapse; width: 100%; min-width: 1200px; }
+th, td { border-bottom: 1px solid var(--border); padding: 4px; text-align: left; }
+th { position: sticky; top: 0; background: var(--code-bg); font-size: 12px; padding: 8px; white-space: nowrap; }
+td input, td select { width: 100%; min-width: 90px; }
+td:nth-child(1) input, td:nth-child(10) input { min-width: 90px; }
+td:nth-child(8) input, td:nth-child(9) input { min-width: 150px; }
+
+.hint { margin: 10px 0 0; color: var(--muted); font-size: 12px; }
+.status { color: var(--muted); font-size: 12px; }
+.status.warn { color: var(--danger); }
+textarea { width: 100%; font-family: Consolas, monospace; font-size: 12px; white-space: pre; resize: vertical; }
+
+[hidden] { display: none !important; }
+.tab-panel { display: grid; gap: 16px; }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--border); }
+.tabs button { border-radius: 6px 6px 0 0; border-bottom: none; margin-bottom: -1px; background: var(--bg); color: var(--muted); }
+.tabs button.active { background: var(--card); color: var(--text); font-weight: bold; border-color: var(--border); }
+#deleteIds { font-family: Consolas, monospace; white-space: pre-wrap; }
